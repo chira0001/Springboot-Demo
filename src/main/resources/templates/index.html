@@ -165,6 +165,11 @@
     <h1>Restaurant List</h1>
     <p class="subtitle">All restaurants currently available in the system.</p>
 
+    <!-- Add new button -->
+    <p style="margin-bottom: 12px;">
+        <a th:href="@{/new}" class="btn-link btn-edit">Add New Restaurant</a>
+    </p>
+
     <div class="card">
         <table>
             <thead>
@@ -187,7 +192,6 @@
                     <span class="tag" th:text="${restuarent.cuisine}"></span>
                 </td>
                 <td class="actions">
-                    <!-- fixed Thymeleaf syntax here -->
                     <a class="btn-link btn-edit"
                        th:href="@{'/edit/' + ${restuarent.id}}">
                         Edit
@@ -201,8 +205,6 @@
             </tbody>
         </table>
     </div>
-
-    <a href="new_restuarent.html">Add New Restuarent</a>
 </div>
 </body>
 </html>

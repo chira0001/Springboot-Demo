@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Restaurant Management</title>
-
     <style>
         :root {
             --primary: #2c3e50;
@@ -228,16 +227,15 @@
 <body>
 <div class="page-wrapper">
     <h1>Restaurant Management</h1>
-    <p class="subtitle">Add a new restaurant and view all existing restaurants.</p>
+    <p class="subtitle">Add a new restaurant.</p>
 
     <!-- Form Card -->
     <div class="card">
-        <h2>Add / Edit Restaurant</h2>
+        <h2>Add Restaurant</h2>
 
-        <!-- 'restaurant' should be a model attribute from the controller -->
-        <form th:action="@{/save}" th:object="${restaurant}" method="post">
+        <!-- must match controller: model.addAttribute("restuarent", new Restuarent()) -->
+        <form th:action="@{/save}" th:object="${restuarent}" method="post">
             <div class="form-grid">
-                <!-- ID (hidden for new, shown for edit if you want) -->
                 <input type="hidden" th:field="*{id}"/>
 
                 <div class="form-group">
@@ -265,6 +263,11 @@
 
             <button type="submit" class="btn-primary">Save Restaurant</button>
         </form>
+
+        <!-- back to list -->
+        <p style="margin-top: 16px;">
+            <a th:href="@{/}">Back to list</a>
+        </p>
     </div>
 </div>
 </body>
