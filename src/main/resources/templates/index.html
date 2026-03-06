@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Restaurant Lists</title>
+
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --primary-light: #34495e;
+            --accent: #3498db;
+            --accent-soft: #ecf6fd;
+            --danger: #e74c3c;
+            --bg: #f4f6f9;
+            --card-bg: #ffffff;
+            --border: #dfe4ea;
+            --text-main: #2d3436;
+            --text-muted: #636e72;
+            --radius: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+            Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text-main);
+        }
+
+        .page-wrapper {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 16px;
+        }
+
+        h1 {
+            margin: 0 0 16px;
+            font-size: 28px;
+            color: var(--primary);
+        }
+
+        .subtitle {
+            margin-bottom: 24px;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            padding: 20px 24px 24px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 8px;
+            font-size: 14px;
+        }
+
+        thead {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        th, td {
+            padding: 10px 12px;
+            text-align: left;
+        }
+
+        th {
+            font-weight: 600;
+            border-bottom: 1px solid var(--primary-light);
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9fbff;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        tbody tr:hover {
+            background-color: var(--accent-soft);
+        }
+
+        td {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .rating {
+            font-weight: 600;
+            color: #f39c12;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 999px;
+            background-color: #eafaf1;
+            color: #1e8449;
+            font-size: 12px;
+        }
+
+        .actions {
+            white-space: nowrap;
+        }
+
+        .btn-link {
+            display: inline-block;
+            padding: 4px 10px;
+            margin-right: 6px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            transition: background-color 0.15s ease, color 0.15s ease;
+        }
+
+        .btn-edit {
+            background-color: var(--accent-soft);
+            color: var(--accent);
+        }
+
+        .btn-edit:hover {
+            background-color: var(--accent);
+            color: #fff;
+        }
+
+        .btn-delete {
+            background-color: #fdecea;
+            color: var(--danger);
+        }
+
+        .btn-delete:hover {
+            background-color: var(--danger);
+            color: #fff;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-wrapper {
+                margin: 20px auto;
+            }
+
+            table, thead, tbody, th, td, tr {
+                font-size: 13px;
+            }
+
+            th, td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+    <h1>Restaurant List</h1>
+    <p class="subtitle">All restaurants currently available in the system.</p>
+
+    <div class="card">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Rating</th>
+                <th>Cuisine</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="restuarent : ${listRestuarents}">
+                <td th:text="${restuarent.id}"></td>
+                <td th:text="${restuarent.name}"></td>
+                <td th:text="${restuarent.location}"></td>
+                <td class="rating" th:text="${restuarent.rating}"></td>
+                <td>
+                    <span class="tag" th:text="${restuarent.cuisine}"></span>
+                </td>
+                <td class="actions">
+                    <!-- fixed Thymeleaf syntax here -->
+                    <a class="btn-link btn-edit"
+                       th:href="@{'/edit/' + ${restuarent.id}}">
+                        Edit
+                    </a>
+                    <a class="btn-link btn-delete"
+                       th:href="@{'/delete/' + ${restuarent.id}}">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <a href="new_restuarent.html">Add New Restuarent</a>
+</div>
+</body>
+</html>
